@@ -8,9 +8,12 @@ import org.junit.Test;
  */
 public class StringLearn {
     @Test
-    public void testStringConstruction() {
+    public void testNoneConstructor() {
         String s = new String();
-        System.out.println(s);
+    }
+
+    public void testStringConstructor() {
+        String s = new String("参数");
     }
 
 
