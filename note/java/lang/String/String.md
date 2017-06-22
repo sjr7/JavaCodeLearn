@@ -421,26 +421,81 @@ public int indexOf(int ch, int fromIndex) {
     public int lastIndexOf(int ch) {
             return lastIndexOf(ch, value.length - 1);
         }
-     
-    public int lastIndexOf(int ch, int fromIndex) {
-            if (ch < Character.MIN_SUPPLEMENTARY_CODE_POINT) {
-                // handle most cases here (ch is a BMP code point or a
-                // negative value (invalid code point))
-                final char[] value = this.value;
-                int i = Math.min(fromIndex, value.length - 1);
-                for (; i >= 0; i--) {
-                    if (value[i] == ch) {
-                        return i;
-                    }
-                }
-                return -1;
-            } else {
-                return lastIndexOfSupplementary(ch, fromIndex);
-            }
-        }
-```
-    
+     // 指定一个起始位置进行搜索字符在字符串中出现的位置,如果不存在就返回-1
+    public int lastIndexOf(int ch, int fromIndex);
 
+    // 下面这几个方法都是差不多的用法
+    static int lastIndexOf(char[] source, int sourceOffset, int sourceCount,
+            String target, int fromIndex);
+    
+    static int lastIndexOf(char[] source, int sourceOffset, int sourceCount,
+                char[] target, int targetOffset, int targetCount,
+                int fromIndex);
+    
+```
+
+### 截取字符串,文档给出的例子,也挺好理解的,一个是只指定开启截取的位置,一个是指定开始的位置同时指定结束的位置
+```java
+    /*    
+     *     "unhappy".substring(2) returns "happy"
+     *     "Harbison".substring(3) returns "bison"
+     *     "emptiness".substring(9) returns "" (an empty string)
+     */
+   public String substring(int beginIndex);
+   
+   /**
+   *      "hamburger".substring(4, 8) returns "urge"
+   *       "smiles".substring(1, 5) returns "mile"
+   */
+   public String substring(int beginIndex, int endIndex);
+```
+### 这个算是拼接字符串了,值得注意的是这个方法需要注意的地方在传入的对象为空的话默认是返回源对象的,例如：
+ "to".concat("get").concat("her") 返回的是"together"
+```java
+
+public String concat(String str) {
+        int otherLen = str.length();
+        if (otherLen == 0) {
+            // 如果传入的对象长度为0就肯定是空了,直接返回源对象
+            return this;
+        }
+        int len = value.length;
+        char buf[] = Arrays.copyOf(value, len + otherLen);
+        str.getChars(buf, len);
+        return new String(buf, true);
+    }
+```
+
+### 替换字符串,这里的`replace()`原理是使用循环替换给定的字符,`replaceFirst()`跟`replaceAll()`就是调用了正则表达式进行替换操作
+```java
+//  "sparring with a purple porpoise".replace('p', 't');  返回"starring with a turtle tortoise"
+//  "JonL".replace('q', 'x') returns "JonL" 这里没有变化,因为不存在匹配的字符串
+public String replace(char oldChar, char newChar);
+
+public String replaceFirst(String regex, String replacement) {
+        return Pattern.compile(regex).matcher(this).replaceFirst(replacement);
+    }
+
+public String replaceAll(String regex, String replacement) {
+        return Pattern.compile(regex).matcher(this).replaceAll(replacement);
+    }
+
+```
+
+### 验证字符串是否匹配给定的规则,原理就是调用了正则表达式的方法进行比较
+```java
+public boolean matches(String regex) {
+        return Pattern.matches(regex, this);
+    }
+```
+
+### 查看字符串中是否包含给定的字符,原理就是判断字符在字符串中出现的位置下标,然后跟 **-1**进行比较,如果出现过了的话肯定就是大于-1的,也就是会返回**true**
+```java
+public boolean contains(CharSequence s) {
+        return indexOf(s.toString()) > -1;
+    }
+```
+### 
 
 
 
