@@ -495,7 +495,258 @@ public boolean contains(CharSequence s) {
         return indexOf(s.toString()) > -1;
     }
 ```
-### 
+### 切割字符串,主要还是靠自责表达式
+```java
+public String[] split(String regex, int limit);
+// 这个方法还是调用上面那个方法
+public String[] split(String regex) {
+        return split(regex, 0);
+    }
+```
+
+### join()  这个功能也算拼接字符串,不过这个方法有点特别,实在`JDK1.8`新出来的方法,说到底还是调用了`StringJoiner`这个类来拼接的
+```java
+//   String.join("-", "Java", "is", "cool");     这里输出 "Java-is-cool"
+public static String join(CharSequence delimiter, CharSequence... elements){
+            // 下面两个判断都是如果为null就直接抛异常
+            Objects.requireNonNull(delimiter);
+            Objects.requireNonNull(elements);
+            // java8新出的一个类StringJoiner,循环把可变参数放到实例化出来的joiner对象里面去,具体用法看下面
+            StringJoiner joiner = new StringJoiner(delimiter);
+            for (CharSequence cs: elements) {
+                joiner.add(cs);
+            }
+            return joiner.toString();
+}
+```
+这里是传入一个定界符,然后传入一个可以被迭代的对象,也就是必须实现了`Iterable`接口的类,而且这里也用泛型限定了传入的对象还必须是实现了`CharSequence`接口的类,也就是字符序列
+```java
+ public static String join(CharSequence delimiter,
+            Iterable<? extends CharSequence> elements) {
+        Objects.requireNonNull(delimiter);
+        Objects.requireNonNull(elements);
+        StringJoiner joiner = new StringJoiner(delimiter);
+        for (CharSequence cs: elements) {
+            joiner.add(cs);
+        }
+        return joiner.toString();
+    }
+```
+这里上个栗子:
+```java
+     List<String> strings = new LinkedList<>();
+     strings.add("Java");
+     strings.add("is");
+     strings.add("cool");
+     String message = String.join("--", strings);
+     System.out.println(message);
+     //     这里将会输出 "Java--is--cool"
+     
+     //     上面这个等同于下面的代码,因为上面的join方法就是调用StringJoiner类中的方法来完成的
+     LinkedList<String> linkedList = new LinkedList<>();
+     linkedList.add("abc");
+     linkedList.add("def");
+     linkedList.add("ghi");
+     StringJoiner stringJoiner=new StringJoiner("---");
+     for (CharSequence cs:linkedList){
+         stringJoiner.add(cs);
+     }
+     String message = stringJoiner.toString()
+     System.out.println();
+   
+```
+### 转换大小写
+```java
+ public String toLowerCase(Locale locale);
+ public String toLowerCase();
+ public String toUpperCase(Locale locale);
+ public String toUpperCase();
+```
+
+### trim()一般我们都会说是去除字符串中最前面的的**空白字符**而不是**空白**！然后看方法注释我们可以发现并不仅仅是去除**空白字符**,而是可以去除`ASCII`码在``\u0000``至`\u0020`的字符,方法注释第一句话是这样写的:
+> Returns a string whose value is this string, with any leading and trailing  whitespace removed.
+
+ 从这里看去除空白字符是没错的,但下面是还分了三种情况的:  
+ *1. 第一种就是如果最前面跟最后的字符都是编码大于`\u0020`的话就直接返回这个`String`对象的引用
+ > If this  String object represents an empty character
+ >  sequence, or the first and last characters of character sequence
+ >  represented by this  String object both have codes
+ >  greater than '\u005Cu0020'(the space character), then a
+ >  reference to this String object is returned.    
+ 
+ *2.如果没有任何字符编码大于`\u00201`的话就直接返回一个空的字符串
+  >if there is no character with a code greater than
+  >'\u005Cu0020' in the string, then a
+  >String object representing an empty string is
+  >returned.  
+  
+ *3.制造出一个索引从第一个字符开始进行比较,直到第一个字符编码大于`\u0020`的这个位置,然后又从最后一个字符开始进行比较,直到字符大于`\u005Cu0020`的这个位置,这里将会得到两个下标,然后用这两个下标调用`substring(k, m + 1)`方法进行截取
+ >Otherwise, let k be the index of the first character in the
+ >string whose code is greater than  '\u005Cu0020', and let
+ >m be the index of the last character in the string whose code
+ >is greater than  '\u005Cu0020'. A String
+ >object is returned, representing the substring of this string that
+ >begins with the character at index k and ends with the
+ >character at index m -that is, the result of
+ > this.substring(k, m + 1).
+```java
+public String trim() {
+        int len = value.length;
+        int st = 0;
+        char[] val = value;    /* avoid getfield opcode */
+        // 这里就是去除最前面的空白字符的循环,循环遍历被去除字符串的每一个字符,从前面往后面直到遍历完
+        while ((st < len) && (val[st] <= ' ')) {
+            st++;
+        }
+        // 这里就是去除最后面的空白字符,从最后面那个字符开始往前面开始遍历
+        while ((st < len) && (val[len - 1] <= ' ')) {
+            len--;
+        }
+        
+        return ((st > 0) || (len < value.length)) ? substring(st, len) : this;
+    }
+```
+自己写个栗子:
+```java
+        char[] chars = new char[21];
+        chars[0] = '\u0000';
+        chars[1] = '\u0001';
+        chars[2] = '\u0002';
+        chars[3] = '\u0003';
+        chars[4] = '\u0004';
+        chars[5] = '\u0005';
+        chars[6] = '\u0006';
+        chars[7] = '\u0007';
+        chars[8] = '\u0008';
+        chars[9] = '\u0009';
+        chars[10] = '\u0010';
+        chars[11] = '\u0012';
+        chars[12] = '\u0013';
+        chars[13] = '\u0014';
+        chars[14] = '\u0015';
+        chars[15] = '\u0016';
+        chars[16] = '\u0017';
+        chars[17] = '\u0018';
+        chars[18] = '\u0019';
+        chars[19] = '\u0020';
+        chars[20] = '\u0021';
+        String str1 = new String(chars);
+        System.out.println("去除前的长度为"+str1.length());    // 这里输出  21
+        String str2 = str1.trim();
+        System.out.println("去除后的长度为"+str2.length());    // 这里输出  1
+```
+
+### toString(),就是返回自己了
+```java
+public String toString() {
+        return this;
+    }
+```
+
+### 把字符串转换为字符数组,首先就是使用字符串的长度创建出一个等大小的数组,然后调用`System.arraycopy()`方法把数据复制过去,`arraycopy()`方法是个`native`方法,使用`C/C++`开发的,操作系统去执行,`Java`去调用,效率会更高
+```java
+ public char[] toCharArray() {
+        // Cannot use Arrays.copyOf because of class initialization order issues
+        char result[] = new char[value.length];
+        System.arraycopy(value, 0, result, 0, value.length);
+        return result;
+    }
+
+```
+
+### 对指定字符串进行格式化,这个方法非常强大,你可以随意发挥
+```java
+public static String format(String format, Object... args) {
+        return new Formatter().format(format, args).toString();
+    }
+    
+public static String format(Locale l, String format, Object... args) {
+        return new Formatter(l).format(format, args).toString();
+    }
+    
+    
+```
+
+### 把一个`Object`对象转成`String`对象,挺简洁的,判断下为空,要么就是直接`toString()`,要么就当做`String`对象构造参数的参数传入去得到一个`String`对象
+```java
+ public static String valueOf(Object obj) {
+        return (obj == null) ? "null" : obj.toString();
+    }
+    
+ public static String valueOf(Object obj) {
+        return (obj == null) ? "null" : obj.toString();
+    }
+
+public static String valueOf(char data[]) {
+        return new String(data);
+    }
+    
+public static String valueOf(char data[], int offset, int count) {
+        return new String(data, offset, count);
+    }   
+    
+public static String copyValueOf(char data[], int offset, int count) {
+        return new String(data, offset, count);
+    }
+    
+public static String copyValueOf(char data[]) {
+         return new String(data);
+     }
+     
+public static String valueOf(boolean b) {
+        return b ? "true" : "false";
+    }
+    
+public static String valueOf(char c) {
+        char data[] = {c};
+        return new String(data, true);
+    }
+    
+public static String valueOf(int i) {
+        return Integer.toString(i);
+    }
+    
+public static String valueOf(long l) {
+        return Long.toString(l);
+    }
+    
+public static String valueOf(float f) {
+        return Float.toString(f);
+    }
+    
+ public static String valueOf(double d) {
+        return Double.toString(d);
+    }    
+```
+
+### intern()方法,返回一个字符串的内部引用,这是个`native`方法,方法在`JDK6`跟`JDK7`返回的结果是不一样的
+源码中注释是这样写的:**当intern()方法被调用的时候,如果在常量池中有一个相等的对象的话,就会池中直接返回,否则的话就会先添加到池中,然后返回这个对象的引用**
+> if the pool already contains a
+       string equal to this  String object as determined by
+       the  #equals(Object) method, then the string from the pool is
+       returned. Otherwise, this  String object is added to the
+       pool and a reference to this  String object is returned.
+       
+```java
+public native String intern();
+```
+我了解这个还是从《深入理解Java虚拟机》这本书里面知道的,在这本书中有一个栗子:
+```java
+        String str1 = new StringBuilder("计算机").append("软件").toString();
+        System.out.println(str1.intern() == str1);
+        String str2 = new StringBuilder("ja").append("va").toString();
+        System.out.println(str2.intern() == str2);
+```
+在`JDK6`中将会返回两个`false`,但是在`JDK7`中将会返回一个`true`跟`false`,在这里产生差异的原因就是:
+- 在`JDK6`中,`intern()`方法将会把首次遇到的字符串复制到永久代中,返回的也就是字符串实例的引用,然后这里是由`StringBuilder`实例化出来的对象,所以是放在堆上的,所以肯定不是同一个引用
+- 在`JDK1.7`以及其他的部分虚拟机上将不会再进行复制实例,只是将首次出现的字符串复制到常量池里面去,因此这里返回的引用跟`StringBuilder`的创建的字符串实例是同一个
+
+上两张网上来的图
+![images/jdk6.png](images/jdk6.png)  
+
+
+![images/jdk7.png](images/jdk7.png)
+
 
 
 
