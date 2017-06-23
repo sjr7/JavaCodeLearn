@@ -1,5 +1,5 @@
 # java.lang.String浅析
-## String类的声明
+## 一. String类的声明
 ````java
 public final class String
     implements java.io.Serializable, Comparable<String>, CharSequence{} 
@@ -10,7 +10,7 @@ public final class String
  - 实现`Comparable`接口说明`String`支持被排序
  - 实现`CharSequence`接口是一个可读序列
  - 同时在实现接口的时候使用到了`JDK1.5`的新特性`泛型`
-## String类的属性
+## 二. String类的属性
 ````java
  /** The value is used for character storage. */
     private final char value[];
@@ -36,9 +36,9 @@ private static final ObjectStreamField[] serialPersistentFields =
         new ObjectStreamField[0];
 ```
 这个属性看名字的话就是跟反序列化有关的,就是说一个String实例来源于输入的字节流中,也就是反序列化中的字节流
-
-## String类的构造方法
-  ### 一.  无参的构造方法
+---
+## 三.String类的构造方法
+  ###  ◆◆     无参的构造方法
   ```java
 /**
      * Initializes a newly created  String object so that it represents
@@ -53,8 +53,8 @@ private static final ObjectStreamField[] serialPersistentFields =
 ```java
    new String()==null   // 这里得到的是false
 ```
-
-### 传入`String`类型的值实例化,这里初始化流程就是直接把传入的源`String`类型的值中`value`跟`hash`复制给目标`String`类型
+---
+###  ◆◆     传入`String`类型的值实例化,这里初始化流程就是直接把传入的源`String`类型的值中`value`跟`hash`复制给目标`String`类型
  ```java
     public String(String original) {
         this.value = original.value;
@@ -84,8 +84,8 @@ private static final ObjectStreamField[] serialPersistentFields =
   ![images/str2.jpg](images/str2.jpg)
   我们可以留意到这里是有个`char[]`,我们这里并没有显示的出现数组,但是这里却出现了,由此我们应该可以想到,这应该就是构成`String`内容的字符数组了
   
-
-### 只传入一个数组对象,使用这种方法创建String的话,这里会调用` Arrays.copyOf()`方法,` Arrays.copyOf()`方法返回的是`char[]`数组,所以作用就是把这个数组里面的内容复制到`String`的字符串数组里面去
+---
+###  ◆◆     只传入一个数组对象,使用这种方法创建String的话,这里会调用` Arrays.copyOf()`方法,` Arrays.copyOf()`方法返回的是`char[]`数组,所以作用就是把这个数组里面的内容复制到`String`的字符串数组里面去
    ```java
    public String(char value[]) {
            this.value = Arrays.copyOf(value, value.length);
@@ -117,7 +117,8 @@ private static final ObjectStreamField[] serialPersistentFields =
            this.value = Arrays.copyOfRange(value, offset, offset+count);
        }
    ````
-### 使用字节数组构建,不过一般更少这样使用,个人感觉,在这里需要注意的是参数`charsetName`跟`charset`,只要传入了这两个参数中的一个的话,就会调用`StringCoding.decode()`这个方法进行解码,然后把`byte[]`转成`char[]`,所以这里纪要特别注意编码的问题,特别是我们的汉字,很多时候老外都是用英文的,所以编码很多时候都不用改,而我们如果有中文还要选择合适的编码进行解码,如果没有明确地指出编码的话,默认是使用`ISO-8859-1`进行解码的
+   ---
+###  ◆◆     使用字节数组构建,不过一般更少这样使用,个人感觉,在这里需要注意的是参数`charsetName`跟`charset`,只要传入了这两个参数中的一个的话,就会调用`StringCoding.decode()`这个方法进行解码,然后把`byte[]`转成`char[]`,所以这里纪要特别注意编码的问题,特别是我们的汉字,很多时候老外都是用英文的,所以编码很多时候都不用改,而我们如果有中文还要选择合适的编码进行解码,如果没有明确地指出编码的话,默认是使用`ISO-8859-1`进行解码的
 ```java
     // 这种方法已经不建议被使用了
     @Deprecated
@@ -164,8 +165,8 @@ private static final ObjectStreamField[] serialPersistentFields =
         }
     }
 ```
-
-### 使用`StringBuffer`跟`StringBuilder`进行构建,既然都已经用了这两个对象了,直接调用这两个对象都有的`toString()`方法,这两个对象都重写了`toString()`方法,得到的就是一个`String`对象
+---
+###  ◆◆     使用`StringBuffer`跟`StringBuilder`进行构建,既然都已经用了这两个对象了,直接调用这两个对象都有的`toString()`方法,这两个对象都重写了`toString()`方法,得到的就是一个`String`对象
 ```java
   // 这里使用synchronized同步buffer这个对象,是线程安全的，缺点是速度会更慢一点
  public String(StringBuffer buffer) {
@@ -180,21 +181,24 @@ private static final ObjectStreamField[] serialPersistentFields =
      }
 
 ```
+---
+## 四.String的方法
 
-### 返回一个值的长度
+###  ◆◆     ◆◆    返回一个值的长度
 ```java
  public int length() {
         return value.length;
     }
 ```
-### 判断一个值是否为空,就是判断长度是否为**0**,为**0**就返回`false`
+---
+###  ◆◆     ◆◆    判断一个值是否为空,就是判断长度是否为**0**,为**0**就返回`false`
 ```java
 public boolean isEmpty() {
         return value.length == 0;
     }
 ```
-
-### 传入一个下标,如果这个下标对应的值是存在的话返回一个下标对应的字符值,否则就抛出下标越界异常
+---
+###  ◆◆     ◆◆    传入一个下标,如果这个下标对应的值是存在的话返回一个下标对应的字符值,否则就抛出下标越界异常
 ```java
 public char charAt(int index) {
         if ((index < 0) || (index >= value.length)) {
@@ -203,7 +207,8 @@ public char charAt(int index) {
         return value[index];
     }
 ```
-### 把一个`String`对象转换为`byte[]`字节数组,然后常用的分为三个方法
+---
+###  ◆◆     ◆◆    把一个`String`对象转换为`byte[]`字节数组,然后常用的分为三个方法
 ```java
    // 直接传入编码的名字就可以进行转换了
    public byte[] getBytes(String charsetName);
@@ -214,8 +219,8 @@ public char charAt(int index) {
    // 按照默认的编码就行转换 
    public byte[] getBytes();
 ```
-
-### 判断两个对象的值是否相等,这里只要传入不是`String`对象必定返回**false**,这个方法的源码还是挺好的,我们写代码的时候其实肯定会碰到这个判断的情况,我们就可以把发生概率最高的那个可能尽可能地放到前面去,可以减少判断的次数
+---
+###  ◆◆     判断两个对象的值是否相等,这里只要传入不是`String`对象必定返回**false**,这个方法的源码还是挺好的,我们写代码的时候其实肯定会碰到这个判断的情况,我们就可以把发生概率最高的那个可能尽可能地放到前面去,可以减少判断的次数
 ```java
 
 public boolean equals(Object anObject) {
@@ -252,7 +257,8 @@ public boolean equals(Object anObject) {
         return false;
     }
 ```
-### 跟实现了`CharSequence`接口的类实例化出来的对象进行比较,这个方法跟`equals()`方法最大的区别就是它比较的范围更加广,而且`equals()`方法只有可能跟`String`方法比较才有可能返回**true**,但是这个方法就不一定了
+---
+###  ◆◆     跟实现了`CharSequence`接口的类实例化出来的对象进行比较,这个方法跟`equals()`方法最大的区别就是它比较的范围更加广,而且`equals()`方法只有可能跟`String`方法比较才有可能返回**true**,但是这个方法就不一定了
 ```java
      // 跟StringBuffer类型对象进行比较,调用的还是下面这个方法,只不过是先把StringBuffer对象强转为CharSequence对象
     public boolean contentEquals(StringBuffer sb) {
@@ -326,7 +332,8 @@ public boolean equals(Object anObject) {
         System.out.println(s1.contentEquals(sb));   //  true,  因为两者的值相等的,而且是跟StringBuffer比较,按照nonSyncContentEquals()方法流程执行下来就是true.
         System.out.println(s1.contentEquals(sb2));  //  true,两者的值是相等的,然后StringBuilder也实现了AbstractStringBuilder对象,所以一样是会执行到nonSyncContentEquals()方法,执行下来就是true.
 ```
-### 忽略大小写进行比较,这个方法就是运用了三木运算符进行比较,一眼看上去很简洁,但是要自己理解下,首先判断地址相等的话就是直接返回**true**的,然后右边还有个长长的**短路与**表达式,比较的`String`对象为空就返回**false**,继续比较两个对象的长度是否一样,不一样返回**false**,最后就是调用`regionMatches()`这个方法得到一个方法的返回值来得到最终的结果,最终的忽略大小写比较是在`regionMatches()`方法里面
+---
+###  ◆◆     忽略大小写进行比较,这个方法就是运用了三木运算符进行比较,一眼看上去很简洁,但是要自己理解下,首先判断地址相等的话就是直接返回**true**的,然后右边还有个长长的**短路与**表达式,比较的`String`对象为空就返回**false**,继续比较两个对象的长度是否一样,不一样返回**false**,最后就是调用`regionMatches()`这个方法得到一个方法的返回值来得到最终的结果,最终的忽略大小写比较是在`regionMatches()`方法里面
 ```java
 public boolean equalsIgnoreCase(String anotherString) {
         return (this == anotherString) ? true
@@ -335,7 +342,8 @@ public boolean equalsIgnoreCase(String anotherString) {
                 && regionMatches(true, 0, anotherString, 0, value.length);
     }
 ```
-### 判断是否以某个前缀开头或者结尾
+---
+###  ◆◆     判断是否以某个前缀开头或者结尾
 ```java
 // 指定开始的下标,然后指定前缀查看是否是这个开始
    public boolean startsWith(String prefix, int toffset) {
@@ -365,8 +373,8 @@ public boolean equalsIgnoreCase(String anotherString) {
      }
     
 ```
-
-### hashCode,产生对象的哈希码,这里是一个数学计算样的,用于产生不冲突的哈希码
+---
+###  ◆◆     hashCode,产生对象的哈希码,这里是一个数学计算样的,用于产生不冲突的哈希码
 ```java
 public int hashCode() {
         int h = hash;
@@ -381,8 +389,8 @@ public int hashCode() {
         return h;
     }
 ```
-
-### 返回一个字符在字符串中的索引未知,返回的位置为第一次出现的
+---
+###  ◆◆     返回一个字符在字符串中的索引未知,返回的位置为第一次出现的
 ```java
 // 直接在字符串中搜索字符出现的位置
 public int indexOf(int ch) {
@@ -414,8 +422,8 @@ public int indexOf(int ch, int fromIndex) {
     }    
     
 ```
-
-### 返回一个字符串最后一次出现的位置
+---
+###  ◆◆     返回一个字符串最后一次出现的位置
 ```java
     // 不指定起始位置搜索最后一次出现的位置
     public int lastIndexOf(int ch) {
@@ -433,8 +441,8 @@ public int indexOf(int ch, int fromIndex) {
                 int fromIndex);
     
 ```
-
-### 截取字符串,文档给出的例子,也挺好理解的,一个是只指定开启截取的位置,一个是指定开始的位置同时指定结束的位置
+---
+###  ◆◆     截取字符串,文档给出的例子,也挺好理解的,一个是只指定开启截取的位置,一个是指定开始的位置同时指定结束的位置
 ```java
     /*    
      *     "unhappy".substring(2) returns "happy"
@@ -449,7 +457,8 @@ public int indexOf(int ch, int fromIndex) {
    */
    public String substring(int beginIndex, int endIndex);
 ```
-### 这个算是拼接字符串了,值得注意的是这个方法需要注意的地方在传入的对象为空的话默认是返回源对象的,例如：
+---
+###  ◆◆     这个算是拼接字符串了,值得注意的是这个方法需要注意的地方在传入的对象为空的话默认是返回源对象的,例如：
  "to".concat("get").concat("her") 返回的是"together"
 ```java
 
@@ -465,8 +474,8 @@ public String concat(String str) {
         return new String(buf, true);
     }
 ```
-
-### 替换字符串,这里的`replace()`原理是使用循环替换给定的字符,`replaceFirst()`跟`replaceAll()`就是调用了正则表达式进行替换操作
+---
+###  ◆◆     替换字符串,这里的`replace()`原理是使用循环替换给定的字符,`replaceFirst()`跟`replaceAll()`就是调用了正则表达式进行替换操作
 ```java
 //  "sparring with a purple porpoise".replace('p', 't');  返回"starring with a turtle tortoise"
 //  "JonL".replace('q', 'x') returns "JonL" 这里没有变化,因为不存在匹配的字符串
@@ -481,21 +490,22 @@ public String replaceAll(String regex, String replacement) {
     }
 
 ```
-
-### 验证字符串是否匹配给定的规则,原理就是调用了正则表达式的方法进行比较
+---
+###  ◆◆     验证字符串是否匹配给定的规则,原理就是调用了正则表达式的方法进行比较
 ```java
 public boolean matches(String regex) {
         return Pattern.matches(regex, this);
     }
 ```
-
-### 查看字符串中是否包含给定的字符,原理就是判断字符在字符串中出现的位置下标,然后跟 **-1**进行比较,如果出现过了的话肯定就是大于-1的,也就是会返回**true**
+---
+###  ◆◆     查看字符串中是否包含给定的字符,原理就是判断字符在字符串中出现的位置下标,然后跟 **-1**进行比较,如果出现过了的话肯定就是大于-1的,也就是会返回**true**
 ```java
 public boolean contains(CharSequence s) {
         return indexOf(s.toString()) > -1;
     }
 ```
-### 切割字符串,主要还是靠自责表达式
+---
+###  ◆◆     切割字符串,主要还是靠自责表达式
 ```java
 public String[] split(String regex, int limit);
 // 这个方法还是调用上面那个方法
@@ -503,8 +513,8 @@ public String[] split(String regex) {
         return split(regex, 0);
     }
 ```
-
-### join()  这个功能也算拼接字符串,不过这个方法有点特别,实在`JDK1.8`新出来的方法,说到底还是调用了`StringJoiner`这个类来拼接的
+---
+###  ◆◆     join()  这个功能也算拼接字符串,不过这个方法有点特别,实在`JDK1.8`新出来的方法,说到底还是调用了`StringJoiner`这个类来拼接的
 ```java
 //   String.join("-", "Java", "is", "cool");     这里输出 "Java-is-cool"
 public static String join(CharSequence delimiter, CharSequence... elements){
@@ -555,15 +565,16 @@ public static String join(CharSequence delimiter, CharSequence... elements){
      System.out.println();
    
 ```
-### 转换大小写
+---
+###  ◆◆     转换大小写
 ```java
  public String toLowerCase(Locale locale);
  public String toLowerCase();
  public String toUpperCase(Locale locale);
  public String toUpperCase();
 ```
-
-### trim()一般我们都会说是去除字符串中最前面的的**空白字符**而不是**空白**！然后看方法注释我们可以发现并不仅仅是去除**空白字符**,而是可以去除`ASCII`码在``\u0000``至`\u0020`的字符,方法注释第一句话是这样写的:
+---
+###  ◆◆     trim()一般我们都会说是去除字符串中最前面的的**空白字符**而不是**空白**！然后看方法注释我们可以发现并不仅仅是去除**空白字符**,而是可以去除`ASCII`码在``\u0000``至`\u0020`的字符,方法注释第一句话是这样写的:
 > Returns a string whose value is this string, with any leading and trailing  whitespace removed.
 
  从这里看去除空白字符是没错的,但下面是还分了三种情况的:  
@@ -635,15 +646,15 @@ public String trim() {
         String str2 = str1.trim();
         System.out.println("去除后的长度为"+str2.length());    // 这里输出  1
 ```
-
-### toString(),就是返回自己了
+---
+###  ◆◆     toString(),就是返回自己了
 ```java
 public String toString() {
         return this;
     }
 ```
-
-### 把字符串转换为字符数组,首先就是使用字符串的长度创建出一个等大小的数组,然后调用`System.arraycopy()`方法把数据复制过去,`arraycopy()`方法是个`native`方法,使用`C/C++`开发的,操作系统去执行,`Java`去调用,效率会更高
+---
+###  ◆◆     把字符串转换为字符数组,首先就是使用字符串的长度创建出一个等大小的数组,然后调用`System.arraycopy()`方法把数据复制过去,`arraycopy()`方法是个`native`方法,使用`C/C++`开发的,操作系统去执行,`Java`去调用,效率会更高
 ```java
  public char[] toCharArray() {
         // Cannot use Arrays.copyOf because of class initialization order issues
@@ -653,8 +664,8 @@ public String toString() {
     }
 
 ```
-
-### 对指定字符串进行格式化,这个方法非常强大,你可以随意发挥
+---
+###  ◆◆     对指定字符串进行格式化,这个方法非常强大,你可以随意发挥
 ```java
 public static String format(String format, Object... args) {
         return new Formatter().format(format, args).toString();
@@ -666,8 +677,9 @@ public static String format(Locale l, String format, Object... args) {
     
     
 ```
+--- 
 
-### 把一个`Object`对象转成`String`对象,挺简洁的,判断下为空,要么就是直接`toString()`,要么就当做`String`对象构造参数的参数传入去得到一个`String`对象
+###  ◆◆     把一个`Object`对象转成`String`对象,挺简洁的,判断下为空,要么就是直接`toString()`,要么就当做`String`对象构造参数的参数传入去得到一个`String`对象
 ```java
  public static String valueOf(Object obj) {
         return (obj == null) ? "null" : obj.toString();
@@ -718,8 +730,9 @@ public static String valueOf(float f) {
         return Double.toString(d);
     }    
 ```
+---
 
-### intern()方法,返回一个字符串的内部引用,这是个`native`方法,方法在`JDK6`跟`JDK7`返回的结果是不一样的
+###  ◆◆     intern()方法,返回一个字符串的内部引用,这是个`native`方法,方法在`JDK6`跟`JDK7`返回的结果是不一样的
 源码中注释是这样写的:**当intern()方法被调用的时候,如果在常量池中有一个相等的对象的话,就会池中直接返回,否则的话就会先添加到池中,然后返回这个对象的引用**
 > if the pool already contains a
        string equal to this  String object as determined by
@@ -741,7 +754,8 @@ public native String intern();
 - 在`JDK6`中,`intern()`方法将会把首次遇到的字符串复制到永久代中,返回的也就是字符串实例的引用,然后这里是由`StringBuilder`实例化出来的对象,所以是放在堆上的,所以肯定不是同一个引用
 - 在`JDK1.7`以及其他的部分虚拟机上将不会再进行复制实例,只是将首次出现的字符串复制到常量池里面去,因此这里返回的引用跟`StringBuilder`的创建的字符串实例是同一个
 
-上两张网上来的图
+上两张网上来的图  
+
 ![images/jdk6.png](images/jdk6.png)  
 
 
