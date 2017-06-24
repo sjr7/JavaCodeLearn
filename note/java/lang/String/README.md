@@ -1,4 +1,4 @@
-# java.lang.String浅析
+# java.lang.String浅析(JDK1.8)
 ## 一. String类的声明
 ````java
 public final class String
@@ -184,21 +184,21 @@ private static final ObjectStreamField[] serialPersistentFields =
 ---
 ## 四.String的方法
 
-###  ◆◆     ◆◆    返回一个值的长度
+###  ◆◆    返回一个值的长度
 ```java
  public int length() {
         return value.length;
     }
 ```
 ---
-###  ◆◆     ◆◆    判断一个值是否为空,就是判断长度是否为**0**,为**0**就返回`false`
+###  ◆◆        判断一个值是否为空,就是判断长度是否为**0**,为**0**就返回`false`
 ```java
 public boolean isEmpty() {
         return value.length == 0;
     }
 ```
 ---
-###  ◆◆     ◆◆    传入一个下标,如果这个下标对应的值是存在的话返回一个下标对应的字符值,否则就抛出下标越界异常
+###  ◆◆     传入一个下标,如果这个下标对应的值是存在的话返回一个下标对应的字符值,否则就抛出下标越界异常
 ```java
 public char charAt(int index) {
         if ((index < 0) || (index >= value.length)) {
@@ -208,7 +208,7 @@ public char charAt(int index) {
     }
 ```
 ---
-###  ◆◆     ◆◆    把一个`String`对象转换为`byte[]`字节数组,然后常用的分为三个方法
+###  ◆◆       把一个`String`对象转换为`byte[]`字节数组,然后常用的分为三个方法
 ```java
    // 直接传入编码的名字就可以进行转换了
    public byte[] getBytes(String charsetName);
