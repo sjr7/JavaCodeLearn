@@ -6,9 +6,39 @@ import org.junit.Test;
  * Created by 孙建荣 on 17-6-24.上午9:18
  */
 public class IntegerLearn {
+    @Test
+    public void testIntegerCache2() {
+        Integer integer1 = 256;
+        Integer integer2 = 256;
+        System.out.println(integer1 == integer2);
 
-    public void testDigits(){
-        Integer integer=new Integer(1);
+        Integer integer3 = 257;
+        Integer integer4 = 257;
+        System.out.println(integer3 == integer4);
+    }
+
+    @Test
+    public void testIntegerCache() {
+        Integer integer1 = 127;
+        Integer integer2 = 127;
+        System.out.println(integer1 == integer2);
+
+        Integer integer3 = 128;
+        Integer integer4 = 128;
+        System.out.println(integer3 == integer4);
+
+        Integer integer5 = -128;
+        Integer integer6 = -128;
+        System.out.println(integer5 == integer6);
+
+        Integer integer7 = -129;
+        Integer integer8 = -129;
+        System.out.println(integer7 == integer8);
+    }
+
+
+    public void testDigits() {
+        Integer integer = new Integer(1);
     }
 
     @Test
