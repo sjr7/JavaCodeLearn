@@ -9,3 +9,7 @@ S
 ..idea/markdown-navigator/profiles_settings.xml,c/5/c553a33182a8928cd5760d212e343bd13f573c9b
 O
 note/java/lang/String/README.md,b/f/bf7dd8881035ce45b1574f02e498258aec7a9c30
+]
+-lang/src/main/java/com/lang/IntegerLearn.java,8/2/82dae48c6d78878297d1892d76162071384e145c
+P
+ note/java/lang/Integer/README.md,5/0/500755b879d0ad6ea10319b9ff6b353301f133e8

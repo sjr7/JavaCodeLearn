@@ -1,11 +1,68 @@
 package com.lang;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.junit.Test;
+
+import java.io.File;
 
 /**
  * Created by 孙建荣 on 17-6-24.上午9:18
  */
 public class IntegerLearn {
+
+    @Test
+    public void testStringSize(){
+        Integer integer=new Integer(2);
+        long l = integer.longValue();
+        int intValue = integer.intValue();
+        String s = integer.toString();
+        System.out.println(l);
+        System.out.println(intValue);
+        System.out.println(s);
+    }
+
+    @Test
+    public void testMinValue(){
+        int max = Integer.max(1, 222);
+        System.out.println(max);
+    }
+
+    @Test
+    public void testMax2(){
+        int sum = Integer.sum(1, 2);
+        System.out.println(sum);
+    }
+
+    @Test
+    public void testMax(){
+        Integer integer=new Integer(22);
+        short shortValue = integer.shortValue();
+        System.out.println(shortValue);
+    }
+
+    @Test
+    public void testMin() {
+        Integer integer = new Integer(22);
+        int maxValue = Integer.MAX_VALUE;
+        System.out.println(maxValue);
+    }
+
+    @Test
+    public void testRename() {
+        String path = "/media/sunjianrong/HHD_Date/Java/300";
+        File file = new File(path);
+        File[] files = file.listFiles();
+        for (File file2 : files) {
+            if (file2.getName().contains(".mp4.mp4.mp4")) {
+                String fileName = file2.getName();
+//                String newFileName = fileName.replace("_尚学堂_高淇_java300集最全视频教程_", "");
+                String newFileName = fileName.replace(".mp4.mp4.mp4", "");
+                file2.renameTo(new File(path + "/" + newFileName));
+                System.out.println(path + "/" + newFileName);
+            }
+        }
+    }
+
     @Test
     public void testIntegerCache2() {
         Integer integer1 = 256;

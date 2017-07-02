@@ -14,8 +14,8 @@
 
 ###  Java源代码学习
    - java.lang
-       + [String](note/java/lang/String/README.md)
-       + [Integer](note/java/lang/Integer/README.md)
+       + [String 2017-6-21更新](note/java/lang/String/README.md)
+       + [Integer 2017-6-24更新](note/java/lang/Integer/README.md)
        + [Long(未阅读)](note/java/lang/Long/README.md)
        + [Enum(未阅读)](note/java/lang/Enum/README.md)
        + [ThreadLocal(未阅读)](note/java/lang/ThreadLocal/README.md)
