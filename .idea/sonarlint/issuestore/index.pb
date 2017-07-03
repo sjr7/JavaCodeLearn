@@ -13,3 +13,7 @@ O
 -lang/src/main/java/com/lang/IntegerLearn.java,8/2/82dae48c6d78878297d1892d76162071384e145c
 P
  note/java/lang/Integer/README.md,5/0/500755b879d0ad6ea10319b9ff6b353301f133e8
+Z
+*lang/src/main/java/com/lang/EnumLearn.java,8/0/80681291ce9b4c49ad011ed184ce09b2ae807f01
+M
+note/java/lang/Enum/README.md,7/7/77531503ee7dba800b4c959509e70118918d72d2
