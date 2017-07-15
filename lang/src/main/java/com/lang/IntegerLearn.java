@@ -49,14 +49,14 @@ public class IntegerLearn {
 
     @Test
     public void testRename() {
-        String path = "/media/sunjianrong/HHD_Date/Java/300";
+        String path = "/media/sunjianrong/HHD_Date/Java/尚学堂高淇java300集第二季";
         File file = new File(path);
         File[] files = file.listFiles();
         for (File file2 : files) {
-            if (file2.getName().contains(".mp4.mp4.mp4")) {
+            if (file2.getName().contains("_尚学堂_【裴新】_java300集最全视频教程_")) {
                 String fileName = file2.getName();
 //                String newFileName = fileName.replace("_尚学堂_高淇_java300集最全视频教程_", "");
-                String newFileName = fileName.replace(".mp4.mp4.mp4", "");
+                String newFileName = fileName.replace("_尚学堂_【裴新】_java300集最全视频教程_", "");
                 file2.renameTo(new File(path + "/" + newFileName));
                 System.out.println(path + "/" + newFileName);
             }

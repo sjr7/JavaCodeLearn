@@ -1,76 +1,76 @@
 
-;squid:S1481"&Remove this unused "s" local variable.(â˜Ê”
-Rsquid:S1854"8Remove this useless assignment to local variable "str2".(ô¶çùÿÿÿÿ
-Jsquid:S1854"5Remove this useless assignment to local variable "s".(â˜Ê”
 Asquid:S1481",Remove this unused "charset" local variable.(Ìô©Í
-:squid:S2129" Remove this "String" constructor(—Ò’Äûÿÿÿÿ
-Csquid:S1481")Remove this unused "str1" local variable.(òÏ¿ôúÿÿÿÿ
-R
-squid:S106"9Replace this use of System.out or System.err by a logger.(´‹¹öşÿÿÿÿ
-L
-squid:S106"9Replace this use of System.out or System.err by a logger.(ƒÚáB
-T
-squid:S106"9Replace this use of System.out or System.err by a logger.(¹¯ÇŒ8ü£¶œÍ+
 Y
 squid:S106"9Replace this use of System.out or System.err by a logger.(ÛÕ¹ûÿÿÿÿ8®ˆ ™Í+
-M
-squid:S106"9Replace this use of System.out or System.err by a logger.(½¯¹½
-R
-squid:S106"9Replace this use of System.out or System.err by a logger.(“Ÿ÷Ÿüÿÿÿÿ
-R
-squid:S106"9Replace this use of System.out or System.err by a logger.(“Ÿ÷Ÿüÿÿÿÿ
-L
-squid:S106"9Replace this use of System.out or System.err by a logger.(âùÏ=
-Csquid:S1481")Remove this unused "str5" local variable.(ö²Õãıÿÿÿÿ
-T
-squid:S106"9Replace this use of System.out or System.err by a logger.(³“Ô•8Œ·¸œÍ+
-ysquid:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(¦Ø¼üÿÿÿÿ
-M
-squid:S106"9Replace this use of System.out or System.err by a logger.(äÚÿŠ
-ksquid:S2159"VRemove this call to "equals"; comparisons between unrelated types always return false.(º¹øÂ
-`squid:S1192"FDefine a constant instead of duplicating this literal "hello" 4 times.(ü³êÑşÿÿÿÿ
-psquid:S2159"VRemove this call to "equals"; comparisons between unrelated types always return false.(æ´Ì¿üÿÿÿÿ
-Csquid:S1481")Remove this unused "str2" local variable.(ô¶çùÿÿÿÿ
 4squid:S2129" Remove this "String" constructor(º¤Ğ[
-M
-squid:S106"9Replace this use of System.out or System.err by a logger.(í¦¿
-L
-squid:S106"9Replace this use of System.out or System.err by a logger.(âùÏ=
-R
-squid:S106"9Replace this use of System.out or System.err by a logger.(æ´Ì¿üÿÿÿÿ
-R
-squid:S106"9Replace this use of System.out or System.err by a logger.(Å­Ëİúÿÿÿÿ
-M
-squid:S106"9Replace this use of System.out or System.err by a logger.(½¯ß²
-5squid:S2129" Remove this "String" constructor(±È‹â
-5squid:S2129" Remove this "String" constructor(â˜Ê”
-Rsquid:S1854"8Remove this useless assignment to local variable "str1".(òÏ¿ôúÿÿÿÿ
-Y
-squid:S106"9Replace this use of System.out or System.err by a logger.(Å­Ëİúÿÿÿÿ8”â•Í+
+Csquid:S1481")Remove this unused "str1" local variable.(òÏ¿ôúÿÿÿÿ
 5squid:S2129" Remove this "String" constructor(£›Íâ
+ksquid:S2159"VRemove this call to "equals"; comparisons between unrelated types always return false.(º¹øÂ
+5squid:S2129" Remove this "String" constructor(â˜Ê”
+T
+squid:S106"9Replace this use of System.out or System.err by a logger.(ı™Ûò8¨æ£™Í+
+;squid:S1481"&Remove this unused "s" local variable.(â˜Ê”
 S
 squid:S106"9Replace this use of System.out or System.err by a logger.(ĞíÃ8øƒŸ–Í+
-Y
-squid:S106"9Replace this use of System.out or System.err by a logger.(¶ÔÕ¸şÿÿÿÿ8Œ­ú–Í+
-R
-squid:S106"9Replace this use of System.out or System.err by a logger.(ŸÖ³úùÿÿÿÿ
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(º¹øÂ
+:squid:S2129" Remove this "String" constructor(—Ò’Äûÿÿÿÿ
 Csquid:S1481")Remove this unused "str4" local variable.(Ô£¯ëıÿÿÿÿ
+Csquid:S1481")Remove this unused "str5" local variable.(ö²Õãıÿÿÿÿ
+`squid:S1192"FDefine a constant instead of duplicating this literal "hello" 4 times.(ü³êÑşÿÿÿÿ
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(“Ÿ÷Ÿüÿÿÿÿ
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(´‹¹öşÿÿÿÿ
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(Å­Ëİúÿÿÿÿ
+ysquid:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(¦Ø¼üÿÿÿÿ
+Rsquid:S1854"8Remove this useless assignment to local variable "str1".(òÏ¿ôúÿÿÿÿ
+Jsquid:S1854"5Remove this useless assignment to local variable "s".(â˜Ê”
+T
+squid:S106"9Replace this use of System.out or System.err by a logger.(³“Ô•8Œ·¸œÍ+
+Rsquid:S1854"8Remove this useless assignment to local variable "str5".(ö²Õãıÿÿÿÿ
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(½¯ß²
 =squid:S1481")Remove this unused "str3" local variable.(§€?
-L
-squid:S106"9Replace this use of System.out or System.err by a logger.(âùÏ=
+Psquid:S1854";Remove this useless assignment to local variable "charset".(Ìô©Í
+Rsquid:S1854"8Remove this useless assignment to local variable "str2".(ô¶çùÿÿÿÿ
 S
 squid:S106"9Replace this use of System.out or System.err by a logger.(ĞíÃ8Ä€ü–Í+
-:squid:S2129" Remove this "String" constructor(·»¼ùÿÿÿÿ
-Rsquid:S1854"8Remove this useless assignment to local variable "str5".(ö²Õãıÿÿÿÿ
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(í¦¿
 T
 squid:S106"9Replace this use of System.out or System.err by a logger.(¢©²©8‰Ã™Í+
 M
 squid:S106"9Replace this use of System.out or System.err by a logger.(Áß‡Ü
-Lsquid:S1854"8Remove this useless assignment to local variable "str3".(§€?
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(“Ÿ÷Ÿüÿÿÿÿ
+L
+squid:S106"9Replace this use of System.out or System.err by a logger.(ƒÚáB
+5squid:S2129" Remove this "String" constructor(±È‹â
 T
-squid:S106"9Replace this use of System.out or System.err by a logger.(ı™Ûò8¨æ£™Í+
-Rsquid:S1854"8Remove this useless assignment to local variable "str4".(Ô£¯ëıÿÿÿÿ
-Psquid:S1854";Remove this useless assignment to local variable "charset".(Ìô©Í
-:squid:S2129" Remove this "String" constructor(Şï–ßúÿÿÿÿ
+squid:S106"9Replace this use of System.out or System.err by a logger.(¹¯ÇŒ8ü£¶œÍ+
 M
-squid:S106"9Replace this use of System.out or System.err by a logger.(º¹øÂ
+squid:S106"9Replace this use of System.out or System.err by a logger.(½¯¹½
+Y
+squid:S106"9Replace this use of System.out or System.err by a logger.(Å­Ëİúÿÿÿÿ8”â•Í+
+L
+squid:S106"9Replace this use of System.out or System.err by a logger.(âùÏ=
+Lsquid:S1854"8Remove this useless assignment to local variable "str3".(§€?
+psquid:S2159"VRemove this call to "equals"; comparisons between unrelated types always return false.(æ´Ì¿üÿÿÿÿ
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(äÚÿŠ
+Rsquid:S1854"8Remove this useless assignment to local variable "str4".(Ô£¯ëıÿÿÿÿ
+:squid:S2129" Remove this "String" constructor(·»¼ùÿÿÿÿ
+Csquid:S1481")Remove this unused "str2" local variable.(ô¶çùÿÿÿÿ
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(æ´Ì¿üÿÿÿÿ
+:squid:S2129" Remove this "String" constructor(Şï–ßúÿÿÿÿ
+Y
+squid:S106"9Replace this use of System.out or System.err by a logger.(¶ÔÕ¸şÿÿÿÿ8Œ­ú–Í+
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(ŸÖ³úùÿÿÿÿ
+L
+squid:S106"9Replace this use of System.out or System.err by a logger.(âùÏ=
+L
+squid:S106"9Replace this use of System.out or System.err by a logger.(âùÏ=
