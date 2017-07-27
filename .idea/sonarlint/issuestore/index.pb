@@ -21,3 +21,13 @@ j
 :.idea/dataSources/3b300662-4cc0-4587-b25d-e44a95675524.xml,3/0/304613500a8abce6c541fd771fbf1ffd539332bf
 V
 &lang/src/main/java/com/lang/Enums.java,0/9/0980d530b6b39191fb1cc613e8727332db13798f
+@
+note/template.md,8/4/8463f7f89388f0dda697365604cf9714c6362b6a
+c
+3lang/src/main/java/com/lang/StringBuilderLearn.java,4/a/4ad3da7c98a08ba890daf52e9d7d39c79de176dd
+V
+&note/java/lang/StringBuilder/README.md,9/8/981a436d5a5a96534342950f536403e5fbf25da1
+U
+%note/java/lang/StringBuffer/README.md,6/8/684e681c52d4f12577dd607d13050f8203a3b3a8
+a
+1lang/src/main/java/com/lang/StringBufferTest.java,6/f/6fcf9d4c4c1ad2561d3425db976414186b153b91

@@ -1,63 +1,63 @@
 
-R
-squid:S106"9Replace this use of System.out or System.err by a logger.(êğ»ıÿÿÿÿ
-M
-squid:S106"9Replace this use of System.out or System.err by a logger.(áï–í
-R
-squid:S106"9Replace this use of System.out or System.err by a logger.(ùÇº¬ûÿÿÿÿ
-;squid:S1075"&Remove this hard-coded path-delimiter.(è–÷
-|squid:UselessImportCheck"URemove this unused import 'com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer'.(ùùÒÔùÿÿÿÿ
-L
-squid:S106"9Replace this use of System.out or System.err by a logger.(Öå–4
-R
-squid:S106"9Replace this use of System.out or System.err by a logger.(¾ùôŒùÿÿÿÿ
-M
-squid:S106"9Replace this use of System.out or System.err by a logger.(êÛÛ
-R
-squid:S106"9Replace this use of System.out or System.err by a logger.(¥µÿ“ûÿÿÿÿ
-Q
-squid:S899"=Do something with the "boolean" value returned by "renameTo".(è–÷
-R
-squid:S106"9Replace this use of System.out or System.err by a logger.(Å­Ëİúÿÿÿÿ
-;squid:S2129"!Remove this "Integer" constructor(ÚĞ²Àûÿÿÿÿ
-6squid:S2129"!Remove this "Integer" constructor( Ñˆ
-R
-squid:S106"9Replace this use of System.out or System.err by a logger.(ùÇº¬ûÿÿÿÿ
-M
-squid:S106"9Replace this use of System.out or System.err by a logger.(éÖõ×
-M
-squid:S106"9Replace this use of System.out or System.err by a logger.(ÁßÆä
-Osquid:S1191"5Use classes from the Java API instead of Sun classes.(ùùÒÔùÿÿÿÿ
-Fsquid:S1481",Remove this unused "integer" local variable.(ÚĞ²Àûÿÿÿÿ
-;squid:S2129"!Remove this "Integer" constructor(Ö«˜¦ÿÿÿÿÿ
-R
-squid:S106"9Replace this use of System.out or System.err by a logger.(Ò¨Òıÿÿÿÿ
-Usquid:S1854";Remove this useless assignment to local variable "integer".(ÚĞ²Àûÿÿÿÿ
-L
-squid:S106"9Replace this use of System.out or System.err by a logger.(—µU
-R
-squid:S106"9Replace this use of System.out or System.err by a logger.(¥£·Ÿÿÿÿÿÿ
-Asquid:S1481",Remove this unused "integer" local variable.( Ñˆ
-Psquid:S1854";Remove this useless assignment to local variable "integer".( Ñˆ
-R
-squid:S106"9Replace this use of System.out or System.err by a logger.(ÍÜ’ëûÿÿÿÿ
-R
-squid:S106"9Replace this use of System.out or System.err by a logger.(ÿ¡Îşÿÿÿÿ
-R
-squid:S106"9Replace this use of System.out or System.err by a logger.(ÍÜ’ëûÿÿÿÿ
 esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¯Ãìÿÿÿÿÿ
 M
 squid:S106"9Replace this use of System.out or System.err by a logger.(ì÷³Ï
-M
-squid:S106"9Replace this use of System.out or System.err by a logger.(‚¨Ö§
-[squid:S1075"ARefactor your code to get this URI from a customizable parameter.(²¿€ıÿÿÿÿ
-M
-squid:S106"9Replace this use of System.out or System.err by a logger.(ıÂÿ¿
 `squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÎÏĞ
-M
-squid:S106"9Replace this use of System.out or System.err by a logger.(Ôâ•Å
+[squid:S1075"ARefactor your code to get this URI from a customizable parameter.(²¿€ıÿÿÿÿ
 L
 squid:S106"9Replace this use of System.out or System.err by a logger.(â±Ç}
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(ıÂÿ¿
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(ÍÜ’ëûÿÿÿÿ
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(¾ùôŒùÿÿÿÿ
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(ÍÜ’ëûÿÿÿÿ
+L
+squid:S106"9Replace this use of System.out or System.err by a logger.(Öå–4
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(ùÇº¬ûÿÿÿÿ
 R
 squid:S106"9Replace this use of System.out or System.err by a logger.(±£Òıÿÿÿÿ
 ;squid:S2129"!Remove this "Integer" constructor(ÚĞ²Àûÿÿÿÿ
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(ÿ¡Îşÿÿÿÿ
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(éÖõ×
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(¥µÿ“ûÿÿÿÿ
+;squid:S1075"&Remove this hard-coded path-delimiter.(è–÷
+Asquid:S1481",Remove this unused "integer" local variable.( Ñˆ
+Q
+squid:S899"=Do something with the "boolean" value returned by "renameTo".(è–÷
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(Ò¨Òıÿÿÿÿ
+6squid:S2129"!Remove this "Integer" constructor( Ñˆ
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(¥£·Ÿÿÿÿÿÿ
+Osquid:S1191"5Use classes from the Java API instead of Sun classes.(ùùÒÔùÿÿÿÿ
+L
+squid:S106"9Replace this use of System.out or System.err by a logger.(—µU
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(ùÇº¬ûÿÿÿÿ
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(ÁßÆä
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(Ôâ•Å
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(‚¨Ö§
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(áï–í
+;squid:S2129"!Remove this "Integer" constructor(Ö«˜¦ÿÿÿÿÿ
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(êÛÛ
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(êğ»ıÿÿÿÿ
+Psquid:S1854";Remove this useless assignment to local variable "integer".( Ñˆ
+;squid:S2129"!Remove this "Integer" constructor(ÚĞ²Àûÿÿÿÿ
+Fsquid:S1481",Remove this unused "integer" local variable.(ÚĞ²Àûÿÿÿÿ
+|squid:UselessImportCheck"URemove this unused import 'com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer'.(ùùÒÔùÿÿÿÿ
+Usquid:S1854";Remove this useless assignment to local variable "integer".(ÚĞ²Àûÿÿÿÿ
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(Å­Ëİúÿÿÿÿ
