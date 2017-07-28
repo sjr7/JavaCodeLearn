@@ -1,8 +1,8 @@
 
-{squid:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(òÀÊì8ûï°Ô+
-]squid:S1854"ARemove this useless assignment to local variable "stringBuffer2".(±ÏßÄ8Ãí°Ô+
-Nsquid:S1481"2Remove this unused "stringBuffer3" local variable.(òÀÊì8„Ùí°Ô+
-]squid:S1854"ARemove this useless assignment to local variable "stringBuffer3".(òÀÊì8„Ùí°Ô+
 {squid:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(±ÏßÄ8ûï°Ô+
-Nsquid:S1481"2Remove this unused "stringBuffer2" local variable.(±ÏßÄ8Ãí°Ô+
+]squid:S1854"ARemove this useless assignment to local variable "stringBuffer2".(±ÏßÄ8Ãí°Ô+
 €squid:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(ì­ŠÜúÿÿÿÿ8ûï°Ô+
+]squid:S1854"ARemove this useless assignment to local variable "stringBuffer3".(òÀÊì8„Ùí°Ô+
+Nsquid:S1481"2Remove this unused "stringBuffer2" local variable.(±ÏßÄ8Ãí°Ô+
+{squid:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(òÀÊì8ûï°Ô+
+Nsquid:S1481"2Remove this unused "stringBuffer3" local variable.(òÀÊì8„Ùí°Ô+

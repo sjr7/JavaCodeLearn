@@ -31,3 +31,5 @@ U
 %note/java/lang/StringBuffer/README.md,6/8/684e681c52d4f12577dd607d13050f8203a3b3a8
 a
 1lang/src/main/java/com/lang/StringBufferTest.java,6/f/6fcf9d4c4c1ad2561d3425db976414186b153b91
+R
+"note/java/util/ArrayList/README.md,6/a/6a0c2e3efbfb4d3766b578dda33ccf0eeed89688

@@ -202,15 +202,16 @@ public E get(int index) {
 - set方法,设置指定下标的元素内容
 ```java
 public E set(int index, E element) {
+        // 进行下标的范围检测,是否合理
         rangeCheck(index);
-
+         
         E oldValue = elementData(index);
         elementData[index] = element;
         return oldValue;
     }
 ```
 
-- add方法,添加元素到集合里面去
+- 添加相关的方法,添加元素到集合里面去
 ```java
      // 不指定下标添加元素,默认就是在最尾部添加
     public boolean add(E e) {
@@ -227,19 +228,265 @@ public E set(int index, E element) {
         rangeCheckForAdd(index);
         // 调整容量
         ensureCapacityInternal(size + 1);  // Increments modCount!!
-        // 把内容复制到新数组里面去
+        // 把内容复制到新数组里面去,但是把插入位置后的数据往后移动一位
         System.arraycopy(elementData, index, elementData, index + 1,
                          size - index);
-         // 使用数组的方法设置数组的内容                
+         // 使用数组的方法设置下标位置对应的数组内容                
         elementData[index] = element;
         size++;
     }
+    
+    // 丢一个集合进来,然后添加进去
+    public boolean addAll(Collection<? extends E> c) {
+           //  把集合转换为数组
+            Object[] a = c.toArray();
+            // 获取将要被新添加的元素的个数
+            int numNew = a.length;
+            // 调用容量检测,检测是否需要进行扩容
+            ensureCapacityInternal(size + numNew);  // Increments modCount
+            // 复制到新数组中
+            System.arraycopy(a, 0, elementData, size, numNew);
+            // 添加完后集合的大小就是原大小+新添加的元素个数之和
+            size += numNew;
+            // 新添加的元素不为0就说明添加成功了,返回true
+            return numNew != 0;
+        }
+    
+       // 丢进一个集合进来在指定下标插入
+        public boolean addAll(int index, Collection<? extends E> c) {
+            // 检测要被添加的下标位置是否合理
+            rangeCheckForAdd(index);
+            // 把集合转换为数组
+            Object[] a = c.toArray();
+            int numNew = a.length;
+            // 检测是否需要调整数组的容量
+            ensureCapacityInternal(size + numNew);  // Increments modCount
+            // 计算出要要往右移动的位置
+            int numMoved = size - index;
+            if (numMoved > 0)
+                System.arraycopy(elementData, index, elementData, index + numNew,
+                                 numMoved);
+        
+            System.arraycopy(a, 0, elementData, index, numNew);
+            size += numNew;
+            // 不等于0就是新增成功了
+            return numNew != 0;
+        }
 ```
 
+-  删除相关的方法,移除集合里面指定的元素
+````java
+   // 通过指定下标移除指定下标的元素,移除后被移除元素右边的元素将会向左移动
+public E remove(int index) {
+        rangeCheck(index);
+        // 修改次数+1
+        modCount++;
+        E oldValue = elementData(index);
+        // 让元素挨个往左移动一位
+        int numMoved = size - index - 1;
+        if (numMoved > 0)
+            System.arraycopy(elementData, index+1, elementData, index,
+                             numMoved);
+        // 把原来数组里面的最后一个元素删除  --size自减
+        elementData[--size] = null; // clear to let GC do its work
+
+        return oldValue;
+    }
+
+   // 删除指定的元素
+    public boolean remove(Object o) {
+        if (o == null) {
+            // 把所有的元素遍历一遍,验证是否有该元素,这里猜得出肯定很慢的
+            for (int index = 0; index < size; index++)
+                // 循环到某下标的值为null就说明遍历到了就return跳出循环
+                if (elementData[index] == null) {
+                   // 调用一个快速移除方法
+                    fastRemove(index);
+                    return true;
+                }
+        } else {
+            // 依旧是遍历所有的元素,如果两个Object元素使用equals比较相等就说明是相等了
+            for (int index = 0; index < size; index++)
+                if (o.equals(elementData[index])) {
+                    fastRemove(index);
+                    return true;
+                }
+        }
+        return false;
+    }
+
+    
+    // 一个私有的移除方法,跳过了越界检查,并且不返回被删除的值
+    private void fastRemove(int index) {
+        modCount++;
+        int numMoved = size - index - 1;
+        if (numMoved > 0)
+            System.arraycopy(elementData, index+1, elementData, index,
+                             numMoved);
+        elementData[--size] = null; // clear to let GC do its work
+    }
+    
+    // 清除集合里面所有的元素,原理就是把所有的下标元素值置为null,这个就会被回收
+    public void clear() {
+            modCount++;
+    
+            // clear to let GC do its work
+            for (int i = 0; i < size; i++)
+                elementData[i] = null;
+    
+            size = 0;
+        }
+     // 顾名思义就是移除两个指定下标的元素了   
+     protected void removeRange(int fromIndex, int toIndex) {
+             modCount++;
+             int numMoved = size - toIndex;
+             System.arraycopy(elementData, toIndex, elementData, fromIndex,
+                              numMoved);
+     
+             // clear to let GC do its work
+             int newSize = size - (toIndex-fromIndex);
+             for (int i = newSize; i < size; i++) {
+                 elementData[i] = null;
+             }
+             size = newSize;
+         }
+         
+      // 移除包含指定集合的所有元素   
+     public boolean removeAll(Collection<?> c) {
+             // 调用一个非空的判断方法,如果为null就抛出异常,程序将无法继续执行
+             Objects.requireNonNull(c);
+             // 调用批量移除这个方法进行移除
+             return batchRemove(c, false);
+         }    
+     
+     // 保留指定的集合元素,其他的被移除    
+     public boolean retainAll(Collection<?> c) {
+             // 调用一个非空的判断方法,如果为null就抛出异常,程序将无法继续执行
+             Objects.requireNonNull(c);
+             // 调用批量移除这个方法进行移除
+             return batchRemove(c, true);
+         }
+       
+     // 批量移除方法,比较的复杂    
+     private boolean batchRemove(Collection<?> c, boolean complement) {
+             final Object[] elementData = this.elementData;
+             int r = 0, w = 0;
+             boolean modified = false;
+             try {
+                 for (; r < size; r++)
+                     // 判断集合里面是否包含之歌元素,然后根据complement的值决定是否往前删除
+                     if (c.contains(elementData[r]) == complement)
+                         elementData[w++] = elementData[r];
+             } finally {
+                 // Preserve behavioral compatibility with AbstractCollection,
+                 // even if c.contains() throws.
+                 if (r != size) {
+                     // 发生了异常就把r后面的元素复制到w前面去
+                     System.arraycopy(elementData, r,
+                                      elementData, w,
+                                      size - r);
+                     w += size - r;
+                 }
+                 if (w != size) {
+                     // clear to let GC do its work
+                     // 清楚这些元素,置空让JVM回收
+                     for (int i = w; i < size; i++)
+                         elementData[i] = null;
+                     modCount += size - w;
+                     size = w;
+                     modified = true;
+                 }
+             }
+             return modified;
+         }    
+````
 
 
+- 检查容量的一些方法
+````java
+    // 普通得到范围检测
+    private void rangeCheck(int index) {
+        if (index >= size)
+            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+    }
 
+    // 添加元素的时候进行范围检测
+    private void rangeCheckForAdd(int index) {
+        if (index > size || index < 0)
+            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+    }
 
+    // 索引超出异常消息
+    private String outOfBoundsMsg(int index) {
+        return "Index: "+index+", Size: "+size;
+    }
+````
+
+- 迭代元素的方法
+````java
+
+   public ListIterator<E> listIterator(int index) {
+        if (index < 0 || index > size)
+            throw new IndexOutOfBoundsException("Index: "+index);
+        return new ListItr(index);
+    }
+
+   
+    public ListIterator<E> listIterator() {
+        return new ListItr(0);
+    }
+
+   
+    public Iterator<E> iterator() {
+        return new Itr();
+    }
+````
+
+- 手动序列化以及反序列化方法
+````java
+
+    private void writeObject(java.io.ObjectOutputStream s)
+        throws java.io.IOException{
+        // Write out element count, and any hidden stuff
+        int expectedModCount = modCount;
+        s.defaultWriteObject();
+
+        // Write out size as capacity for behavioural compatibility with clone()
+        s.writeInt(size);
+
+        // Write out all elements in the proper order.
+        for (int i=0; i<size; i++) {
+            s.writeObject(elementData[i]);
+        }
+
+        if (modCount != expectedModCount) {
+            throw new ConcurrentModificationException();
+        }
+    }
+
+   
+    private void readObject(java.io.ObjectInputStream s)
+        throws java.io.IOException, ClassNotFoundException {
+        elementData = EMPTY_ELEMENTDATA;
+
+        // Read in size, and any hidden stuff
+        s.defaultReadObject();
+
+        // Read in capacity
+        s.readInt(); // ignored
+
+        if (size > 0) {
+            // be like clone(), allocate array based upon size not capacity
+            ensureCapacityInternal(size);
+
+            Object[] a = elementData;
+            // Read in all elements in the proper order.
+            for (int i=0; i<size; i++) {
+                a[i] = s.readObject();
+            }
+        }
+    }
+````
 
 
 
