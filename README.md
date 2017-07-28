@@ -26,7 +26,7 @@
        + [BigDecimal(未阅读)](note/java/math/BigDecimal/README.md)
    - java.util
        + [ArrayList【 2017-7-27更新 】](note/java/util/ArrayList/README.md)
-       + [LinkedList(未阅读)](note/java/util/LinkedList/README.md)
+       + [LinkedList【 2017-7-28更新】](note/java/util/LinkedList/README.md)
        + [HashMap(未阅读)](note/java/util/HashMap/README.md)
        + [TreeMap(未阅读)](note/java/util/TreeMap/README.md)
        + [LinkedHashMap(未阅读)](note/java/util/LinkedHashMap/README.md)
