@@ -277,7 +277,7 @@ public E set(int index, E element) {
 -  删除相关的方法,移除集合里面指定的元素
 ````java
    // 通过指定下标移除指定下标的元素,移除后被移除元素右边的元素将会向左移动
-public E remove(int index) {
+      public E remove(int index) {
         rangeCheck(index);
         // 修改次数+1
         modCount++;

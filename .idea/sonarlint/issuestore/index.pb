@@ -25,3 +25,15 @@ S
 #note/java/util/LinkedList/README.md,9/9/9924d025b1533b73870a1f4a51da4f8eaf7389de
 a
 1lang/src/main/java/java/util/LinkedListLearn.java,a/d/ad238ded7f7f73de4734da016f8ad5130db602bc
+d
+4lang/src/main/java/java/lang/StringBuilderLearn.java,d/e/deec6ee7f56055d1535318ebba46c42c028cbdd8
+^
+.lang/src/main/java/java/lang/IntegerLearn.java,7/8/782bcf3d20457f9f97845c0841feac93ed0f3e37
+]
+-lang/src/main/java/java/lang/StringLearn.java,0/d/0d2831fb833fa689c911a7e24ac8f02de1dd268b
+[
++lang/src/main/java/java/lang/EnumLearn.java,e/0/e0594fbf4f8be976a059377d9f8fe088fe9eff3b
+b
+2lang/src/main/java/java/lang/StringBufferTest.java,0/d/0de8c90f63fd5ab9f0547d780faa4bdc0940e293
+W
+'lang/src/main/java/java/lang/Enums.java,a/d/ad76acc2cc063a75715a2e224a73577103c75840

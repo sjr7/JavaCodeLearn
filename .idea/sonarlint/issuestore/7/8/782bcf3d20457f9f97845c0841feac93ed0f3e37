@@ -1,0 +1,52 @@
+
+[squid:S1075"ARefactor your code to get this URI from a customizable parameter.(²¿€ıÿÿÿÿ
+Osquid:S1191"5Use classes from the Java API instead of Sun classes.(ùùÒÔùÿÿÿÿ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¯Ãìÿÿÿÿÿ
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÎÏĞ
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(êğ»ıÿÿÿÿ
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(ì÷³Ï
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(Å­Ëİúÿÿÿÿ
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(¾ùôŒùÿÿÿÿ
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(‚¨Ö§
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(ıÂÿ¿
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(éÖõ×
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(áï–í
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(ùÇº¬ûÿÿÿÿ
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(ÍÜ’ëûÿÿÿÿ
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(ùÇº¬ûÿÿÿÿ
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(ÍÜ’ëûÿÿÿÿ
+L
+squid:S106"9Replace this use of System.out or System.err by a logger.(—µU
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(¥£·Ÿÿÿÿÿÿ
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(ÁßÆä
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(ÿ¡Îşÿÿÿÿ
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(êÛÛ
+M
+squid:S106"9Replace this use of System.out or System.err by a logger.(Ôâ•Å
+L
+squid:S106"9Replace this use of System.out or System.err by a logger.(â±Ç}
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(±£Òıÿÿÿÿ
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(Ò¨Òıÿÿÿÿ
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(¥µÿ“ûÿÿÿÿ
+L
+squid:S106"9Replace this use of System.out or System.err by a logger.(Öå–4
+|squid:UselessImportCheck"URemove this unused import 'com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer'.(ùùÒÔùÿÿÿÿ

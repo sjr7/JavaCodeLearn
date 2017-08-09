@@ -184,7 +184,7 @@ private E unlinkLast(Node<E> l) {
 ````
 - 删除某个指定节点
 ````java
-E unlink(Node<E> x) {
+    E unlink(Node<E> x) {
         // assert x != null;
         final E element = x.item;
         // 获取前一个跟后一个节点元素
@@ -214,6 +214,368 @@ E unlink(Node<E> x) {
 ````
 
 ### 公开的方法
+#####大部分就是调用上面的私有方法来进行操作的
+- 获取第一个元素
+````java
+public E getFirst() {
+        final Node<E> f = first;
+        if (f == null)
+            throw new NoSuchElementException();
+        return f.item;
+    }
+
+    
+````
+- 获取最后一个元素
+````java
+
+    public E getLast() {
+        final Node<E> l = last;
+        if (l == null)
+            throw new NoSuchElementException();
+        return l.item;
+    }
+````
+- 移除第一个元素
+````java
+    public E removeFirst() {
+        final Node<E> f = first;
+        if (f == null)
+            throw new NoSuchElementException();
+        return unlinkFirst(f);
+    }
+````
+- 移除最后一个元素
+
+```java
+    public E removeLast() {
+        final Node<E> l = last;
+        if (l == null)
+            throw new NoSuchElementException();
+        return unlinkLast(l);
+    }
+```
+- 添加到第一个元素位置
+````java
+    public void addFirst(E e) {
+        linkFirst(e);
+    }
+````
+
+- 添加到最后一个元素位置
+```java
+    public void addLast(E e) {
+        linkLast(e);
+    }
+```
+
+- 查看集合中是否包含指定对象
+````java
+    public boolean contains(Object o) {
+        return indexOf(o) != -1;
+    }
+````
+- 返回当前容量大小
+````java
+    public int size() {
+        return size;
+    }
+````
+- 添加指定元素到集合,默认就是放到最后
+````java
+     public boolean add(E e) {
+         linkLast(e);
+         return true;
+     }
+````
+- 移除集合中指定元素,如果有多个只会移除其中的一个
+````java
+    public boolean remove(Object o) {
+        if (o == null) {
+            for (Node<E> x = first; x != null; x = x.next) {
+                if (x.item == null) {
+                    // 调用用私有的方法进行移除
+                    unlink(x);
+                    return true;
+                }
+            }
+        } else {
+            for (Node<E> x = first; x != null; x = x.next) {
+                if (o.equals(x.item)) {
+                    unlink(x);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+````
+
+- 添加指定集合到链表中去,默认就是放到最后
+````java
+    public boolean addAll(Collection<? extends E> c) {
+        return addAll(size, c);
+    }
+ 
+````
+- 添加指定集合中所有的元素到到链表中的指定下标位置
+```java
+public boolean addAll(int index, Collection<? extends E> c) {
+        checkPositionIndex(index);
+
+        Object[] a = c.toArray();
+        int numNew = a.length;
+        if (numNew == 0)
+            return false;
+
+        Node<E> pred, succ;
+        if (index == size) {
+            succ = null;
+            pred = last;
+        } else {
+            succ = node(index);
+            pred = succ.prev;
+        }
+
+        for (Object o : a) {
+            @SuppressWarnings("unchecked") E e = (E) o;
+            Node<E> newNode = new Node<>(pred, e, null);
+            if (pred == null)
+                first = newNode;
+            else
+                pred.next = newNode;
+            pred = newNode;
+        }
+
+        if (succ == null) {
+            last = pred;
+        } else {
+            pred.next = succ;
+            succ.prev = pred;
+        }
+
+        size += numNew;
+        modCount++;
+        return true;
+    }
+```
+- 清楚所有的元素
+````java
+    public void clear() {
+        // Clearing all of the links between nodes is "unnecessary", but:
+        // - helps a generational GC if the discarded nodes inhabit
+        //   more than one generation
+        // - is sure to free memory even if there is a reachable Iterator
+        for (Node<E> x = first; x != null; ) {
+            Node<E> next = x.next;
+            x.item = null;
+            x.next = null;
+            x.prev = null;
+            x = next;
+        }
+        first = last = null;
+        size = 0;
+        modCount++;
+    }
+````
+- 获取指定下标元素
+```java
+    public E get(int index) {
+        checkElementIndex(index);
+        return node(index).item;
+    }
+```
+-设置指定下标的元素
+````java
+    public E set(int index, E element) {
+        checkElementIndex(index);
+        Node<E> x = node(index);
+        E oldVal = x.item;
+        x.item = element;
+        return oldVal;
+    }
+````
+- 添加指定元素到指定下标
+````java
+    public void add(int index, E element) {
+        checkPositionIndex(index);
+
+        if (index == size)
+            linkLast(element);
+        else
+            linkBefore(element, node(index));
+    }
+````
+-移除指定下标元素
+````java
+    public E remove(int index) {
+        checkElementIndex(index);
+        return unlink(node(index));
+    }
+````
+-返回指定下标的节点
+````java
+　　Node<E> node(int index) {
+        // assert isElementIndex(index);
+        // 这里有用移位操作,如果指定下标小于总容量大小的1/2,就从头部开始查找,高中数学二分法
+        if (index < (size >> 1)) {
+            Node<E> x = first;
+            for (int i = 0; i < index; i++)
+                x = x.next;
+            return x;
+        // 大于1/2就从后面开始查找    
+        } else {
+            Node<E> x = last;
+            for (int i = size - 1; i > index; i--)
+                x = x.prev;
+            return x;
+        }
+    }
+````
+
+#### 搜索相关操作
+-　查找集合中包含指定对象的下标位置,默认为第一次出现的位置
+````java
+public int indexOf(Object o) {
+        int index = 0;
+        if (o == null) {
+            for (Node<E> x = first; x != null; x = x.next) {
+                if (x.item == null)
+                    return index;
+                index++;
+            }
+        } else {
+            for (Node<E> x = first; x != null; x = x.next) {
+                if (o.equals(x.item))
+                    return index;
+                index++;
+            }
+        }
+        return -1;
+    }
+````
+- 查找集合中最后一次出现指定对象的下标位置
+````java
+    public int lastIndexOf(Object o) {
+        int index = size;
+        if (o == null) {
+            for (Node<E> x = last; x != null; x = x.prev) {
+                index--;
+                if (x.item == null)
+                    return index;
+            }
+        } else {
+            for (Node<E> x = last; x != null; x = x.prev) {
+                index--;
+                if (o.equals(x.item))
+                    return index;
+            }
+        }
+        return -1;
+    }
+````
+
+#### 队列的操作
+- 出队的操作,不会删除元素,如果为空就会返回null,不会跑出异常
+````java
+public E peek() {
+        final Node<E> f = first;
+        return (f == null) ? null : f.item;
+    }
+````
+- 出队的操作,存在的话就会返回元素并且不会移除元素,但是如果为空就会跑出异常,因为调用的是getFirst()方法
+```java
+ public E element() {
+        return getFirst();
+    }
+```
+- 出队的操作,存在的话就会返回这个元素并且被移除,不存在的话就会返回null
+```java
+public E poll() {
+        final Node<E> f = first;
+        return (f == null) ? null : unlinkFirst(f);
+    }
+```
+- 出队操作,如果不存在就会跑出异常,存在的话就会有返回值,然后删除这个元素
+```java
+ public E remove() {
+        return removeFirst();
+    }
+```
+- 入队操作,把元素放到后端,始终返回true
+```java
+  public boolean offer(E e) {
+        return add(e);
+    }
+```
+
+#### 双向队列操作
+- 入队操作,把元素放到最前端,始终返回true
+```java
+ public boolean offerFirst(E e) {
+         addFirst(e);
+         return true;
+     }
+```
+- 入队操作,把元素放到后端,始终返回true
+```java
+  public boolean offerLast(E e) {
+          addLast(e);
+          return true;
+      }
+```
+- 出队操作,如果存在首元素的话就会被返回,不会被移除,如果不存在就会返回null,不会抛出异常(也就是从前端出队)
+```java
+     public E peekFirst() {
+        final Node<E> f = first;
+        return (f == null) ? null : f.item;
+     }
+```
+- 出队操作,如果存在尾元素的话就会被返回,不会被移除,如果不存在就会返回null,不会抛出异常(也就是从后端出队)
+```java
+public E peekLast() {
+        final Node<E> l = last;
+        return (l == null) ? null : l.item;
+    }
+```
+
+- 出队操作,从前端开始操作,如果存在第一个元素的话就会被返回,并且被移除,如果不存在的话就返回null
+```java
+    public E pollFirst() {
+        final Node<E> f = first;
+        return (f == null) ? null : unlinkFirst(f);
+    }
+```
+
+- 出队操作,从后端开始操作,如果存在最后一个元素的话就会被返回,同事也会被移除,如果不存在的话就会返回null
+```java
+    public E pollLast() {
+        final Node<E> l = last;
+        return (l == null) ? null : unlinkLast(l);
+    }
+```
+- 入栈操作,也就是调用addFirst()方法把元素放在第一个
+```java
+public void push(E e) {
+        addFirst(e);
+    }
+```
+- 出栈操作,也就是把栈顶第一个元素弹出,同时把元素删除
+```java
+    public E pop() {
+        return removeFirst();
+    } 
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
