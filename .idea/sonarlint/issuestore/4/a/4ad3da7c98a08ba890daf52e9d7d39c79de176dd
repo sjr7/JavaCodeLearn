@@ -1,17 +1,0 @@
-
-T
-squid:S106"9Replace this use of System.out or System.err by a logger.(’ıÙ†8”à²¡Ô+
-bsquid:S1854"ARemove this useless assignment to local variable "stringBuilder".(«íÚÒøÿÿÿÿ8¥èŸÔ+
-T
-squid:S106"9Replace this use of System.out or System.err by a logger.(’ıÙ†8Ÿê­¡Ô+
-Ssquid:S1481"2Remove this unused "stringBuilder" local variable.(«íÚÒøÿÿÿÿ8¥èŸÔ+
-bsquid:S1854"ARemove this useless assignment to local variable "stringBuilder".(€È¿¾øÿÿÿÿ8·úÔ+
-Ssquid:S1481"2Remove this unused "stringBuilder" local variable.(€È¿¾øÿÿÿÿ8·úÔ+
-Y
-squid:S106"9Replace this use of System.out or System.err by a logger.(Êäºøÿÿÿÿ8ÁçûÔ+
-Ssquid:S1481"2Remove this unused "stringBuilder" local variable.(€È¿¾øÿÿÿÿ8¥èŸÔ+
-Y
-squid:S106"9Replace this use of System.out or System.err by a logger.(¥Ü¦²ıÿÿÿÿ8¢äƒŸÔ+
-T
-squid:S106"9Replace this use of System.out or System.err by a logger.(’ıÙ†8…¼Ã¡Ô+
-bsquid:S1854"ARemove this useless assignment to local variable "stringBuilder".(€È¿¾øÿÿÿÿ8¥èŸÔ+
