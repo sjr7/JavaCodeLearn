@@ -1,4 +1,4 @@
-package java.lang;
+package test.lang;
 
 /**
  * Created by 孙建荣 on 17-7-3.下午8:38

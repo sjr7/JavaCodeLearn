@@ -27,6 +27,7 @@
    - java.util
        + [ArrayList【 2017-7-27更新 】](note/java/util/ArrayList/README.md)
        + [LinkedList【 2017-7-28更新】](note/java/util/LinkedList/README.md)
+       + [LinkedList跟ArrayList简单的性能测试【 2017-8-10更新】](note/java/util/ArrayListCompareLinkedList/README.md)
        + [HashMap(未阅读)](note/java/util/HashMap/README.md)
        + [TreeMap(未阅读)](note/java/util/TreeMap/README.md)
        + [LinkedHashMap(未阅读)](note/java/util/LinkedHashMap/README.md)
